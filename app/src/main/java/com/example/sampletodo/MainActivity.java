@@ -75,11 +75,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 newTask = editText.getText().toString();
-                todoList.add(newTask);
-                adapter.notifyItemInserted(todoList.size()-1);
-                editText.setText("");
-                saveItems(todoList);
-                Toast.makeText(getApplicationContext(),"Task added",Toast.LENGTH_SHORT).show();
+                if(!newTask.isEmpty()){
+                    todoList.add(newTask);
+                    adapter.notifyItemInserted(todoList.size()-1);
+                    editText.setText("");
+                    saveItems(todoList);
+                    Toast.makeText(getApplicationContext(),"Task added",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Add a task first",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
