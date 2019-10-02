@@ -42,11 +42,7 @@ public class MainActivity extends AppCompatActivity {
         addButton = findViewById(R.id.addButton);
         recyclerView = findViewById(R.id.rv);
 
-
-        todoList = new ArrayList<>();
-        todoList.add("wake up");
-        todoList.add("have bath");
-        todoList.add("have breakfast");
+        loadItems();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         AddOnAdapter.onTaskLongClickListener longClickListener = new AddOnAdapter.onTaskLongClickListener() {
@@ -55,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
                 todoList.remove(position);
                 adapter.notifyItemRemoved(position);
+                saveItems(todoList);
                 Toast.makeText(getApplicationContext(),"Item Removed",Toast.LENGTH_SHORT).show();
             }
         };
@@ -81,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 todoList.add(newTask);
                 adapter.notifyItemInserted(todoList.size()-1);
                 editText.setText("");
+                saveItems(todoList);
                 Toast.makeText(getApplicationContext(),"Task added",Toast.LENGTH_SHORT).show();
             }
         });
